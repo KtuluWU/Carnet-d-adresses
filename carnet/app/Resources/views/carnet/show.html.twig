@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Contact</h1>
+
+    <table>
+        <tbody>
+
+            <tr>
+                <th>Nom</th>
+                <td>{{ carnet.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ carnet.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ carnet.email }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ carnet.numero }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ carnet.adress }}</td>
+            </tr>
+            <tr>
+                <th>Siteweb</th>
+                <td>{{ carnet.siteweb }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('carnet_index') }}">Retour</a>
+        </li>
+        <li>
+            <a href="{{ path('carnet_edit', { 'id': carnet.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+    h1, h2 { line-height: 1.2; margin: 0 0 .5em; color: #FF1493;}
+    h1 { font-size: 36px; }
+    h2 { font-size: 21px; margin-bottom: 1em; }
+    tr {background-color: #FFB6C1;}
+</style>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bienvenue chez votre Carnet d'adresses</h1>
+    <h2>Bonjour {{user.username}}</h2>
+    <h3><a href="/logout">Déconnexion</a></h3>
+
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Numero</th>
+                <th>Siteweb</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.numero }}</td>
+                <td>{{ user.siteweb }}</td>
+                <td>
+                    <a href="{{ path('user_edit', { 'id': user.id }) }}">modifier</a>
+                </td>
+
+            </tr>      
+        </tbody>
+    </table>
+    <h3>Votre carnet d'adresses:</h3>
+    <table>
+        <thead>
+            <tr> 
+                
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Numéro</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carnet in carnets %}
+            <tr>
+ 
+                <td><a href="{{ path('carnet_show', { 'id': carnet.id }) }}">{{ carnet.nom }}</a></td>
+                <td>{{ carnet.prenom }}</td>
+               
+                <td>{{ carnet.numero }}</td>
+              
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('carnet_show', { 'id': carnet.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('carnet_edit', { 'id': carnet.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('carnet_new') }}">Créer un nouveau contact</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+    h1 { font-size: 36px; color: #FF1493; }
+    h2 { font-size: 21px; margin-bottom: 1em; }
+    tr { background-color: #FFB6C1;}
+    p { margin: 0 0 1em 0; }
+    a { color: #0000F0; }
+    a:hover { text-decoration: none; }
+    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+    #container { padding: 2em; }
+    #welcome, #status { margin-bottom: 2em; }
+    #welcome h1 span { display: block; font-size: 75%; }
+    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
+    #icon-book { display: none; }
+
+    @media (min-width: 768px) {
+        #wrapper { width: 80%; margin: 2em auto; }
+        #icon-book { display: inline-block; }
+        #status a, #next a { display: block; }
+
+        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+    }
+</style>
+{% endblock %}
